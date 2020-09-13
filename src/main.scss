@@ -1,0 +1,72 @@
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+@font-face {
+  font-family: "vazir-bold";
+  src: url('./font/Vazir-Bold.eot') format('embedded-opentype'),
+      url('./font/Vazir-Bold.ttf') format('truetype'),
+      url('./font/Vazir-Bold.woff') format('woff'),
+      url('./font/Vazir-Bold.woff2') format('woff2');
+  font-weight: bold;
+}
+@font-face {
+  font-family: "vazir";
+  src: url('./font/Vazir.eot') format('embedded-opentype'),
+      url('./font/Vazir.ttf') format('truetype'),
+      url('./font/Vazir.woff') format('woff'),
+      url('./font/Vazir.woff2') format('woff2');
+  font-weight: normal;
+}
+@font-face {
+  font-family: "FontAwesome";
+  src: url('../node_modules/font-awesome/fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+      url('../node_modules/font-awesome/fonts/fontawesome-webfont.ttf') format('truetype'),
+      url('../node_modules/font-awesome/fonts/fontawesome-webfont.woff') format('woff'),
+      url('../node_modules/font-awesome/fonts/fontawesome-webfont.woff2') format('woff2'),
+      url('../node_modules/font-awesome/fonts/fontawesome-webfont.svg') format('svg');
+  font-weight: normal;
+}
+
+body {
+  padding: 16px;
+  font-family: "vazir";
+  direction: rtl;
+  margin: 16px 0;
+  input {
+    padding: 20px;
+    font-family: "vazir";
+  }
+  button {
+    font-family: "vazir-bold";
+  }
+  i {
+    font-family: "FontAwesome"
+  }
+  .control {
+    padding-left: 8px;
+  }
+}
+
+.main_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.main_red {
+  border: 2px solid red;
+}
+
+.margin-top {
+  margin-top:16px
+}
+
+.register {
+  display: inline-block;
+}
+
+.show-info {
+  display: inline-block;
+}
+
+form {
+  margin-top: 16px;
+}
