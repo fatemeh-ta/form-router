@@ -17,8 +17,8 @@
           <th>موبایل</th>
           <th>رمز عبور</th>
           <th>
-            <button>غیر فعال</button>
-            <button>فعال</button>
+            <button @click="filterData(false)">غیر فعال</button>
+            <button @click="filterData(true)">فعال</button>
           </th>
         </tr>
         <tr
@@ -129,6 +129,7 @@ export default {
         })
         .then((data) => {
           this.users = data;
+          this.infoData = data;
           this.isloading = false;
         });
     },
@@ -138,6 +139,13 @@ export default {
     },
     closeModal() {
       this.show = false;
+    },
+    filterData(showfilter) {
+      if (showfilter) {
+        this.users = this.infoData.filter((user) => user.active === true);
+      } else {
+        this.users = this.infoData.filter((user) => user.active === false);
+      }
     },
   },
   filters: {
@@ -178,6 +186,7 @@ th {
 td {
   margin: 8px;
   padding: 8px !important;
+  width: 150px;
 }
 .color-user {
   background-color: #f1f1f1;
@@ -269,6 +278,10 @@ footer >button {
   .modal-fade-enter-active,
   .modal-fade-leave-active {
     transition: opacity .5s ease
+  }
+
+  table th button {
+    cursor: pointer;
   }
 /* fa fa-check
 fa fa-times */
