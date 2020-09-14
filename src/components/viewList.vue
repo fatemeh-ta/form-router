@@ -9,25 +9,39 @@
       </button>
     </div>
     <!--SHOW LIST USER-->
-    <ul class="margin-top">
-      <li
-        v-for="user in users"
-        :key="user.users"
-      >
-        | {{ user.password }}
-        | {{ user.mobilePhone }}
-        | {{ user.nationalID }}
-        | {{ user.active }}
-        <button
-          type="button"
-          class="btn color-user"
-          @click="showdata(user)"
+    <div v-if="!isloading">
+      <table class="margin-top">
+        <tr>
+          <th> نام کاربری</th>
+          <th>کد ملی</th>
+          <th>موبایل</th>
+          <th>رمز عبور</th>
+          <th>
+            <button>غیر فعال</button>
+            <button>فعال</button>
+          </th>
+        </tr>
+        <tr
+          v-for="user in users"
+          :key="user.users"
         >
-          {{ user.username }}
-        </button>
-      </li>
-    </ul>
-     <!--SHOW LIST USER IN MODAL-->
+          <td>
+            <button
+              type="button"
+              class="btn color-user"
+              @click="showdata(user)"
+            >
+              {{ user.username }}
+            </button>
+          </td>
+          <td>{{ user.nationalID }}</td>
+          <td>{{ user.mobilePhone }}</td>
+          <td>{{ user.password }}</td>
+          <td>{{ user.active }}</td>
+        </tr>
+      </table>
+    </div>
+    <!--SHOW LIST USER IN MODAL-->
     <div v-if="show">
       <transition name="modal-fade">
         <div class="modal-backdrop">
@@ -43,14 +57,14 @@
               <slot name="header">
                 نمایش اطلاعات کاربر ثبت نام شده
 
-                <button
+                <!-- <button
                   type="button"
                   class="btn-close"
                   @click="closeModal"
                   aria-label="Close modal"
                 >
                   x
-                </button>
+                </button> -->
               </slot>
             </header>
             <section
@@ -60,8 +74,8 @@
                <!--CONTENT MODAL-->
               <slot name="body">
                 <div v-if="modalUserShow.active===true">
-                  {{ modalUserShow.username | upperUser }}   *
-                  {{ modalUserShow.nationalID }}   *
+                  {{ modalUserShow.username | upperUser }}  *****
+                  {{ modalUserShow.nationalID }}   *****
                   {{ modalUserShow.mobilePhone | changePhone }}
                 </div>
                 <div v-else>
@@ -96,6 +110,8 @@ export default {
       modalUserShow: '',
       show: false,
       users: null,
+      isloading: true,
+      filter: '',
     };
   },
   methods: {
@@ -113,6 +129,7 @@ export default {
         })
         .then((data) => {
           this.users = data;
+          this.isloading = false;
         });
     },
     showdata(userData) {
@@ -140,6 +157,28 @@ export default {
 </script>
 
 <style>
+table,th,tr,td {
+  border: 1px solid #000;
+  text-align: center;
+}
+table tr:first-child {
+  background-color: #4AAE9B;
+}
+table th:first-child {
+  padding: 8px;
+}
+tr {
+  padding: 8px;
+}
+
+th {
+  width: 130px;
+  vertical-align: middle !important;
+}
+td {
+  margin: 8px;
+  padding: 8px !important;
+}
 .color-user {
   background-color: #f1f1f1;
   border: 1px solid #f0f0f0;
@@ -231,5 +270,6 @@ footer >button {
   .modal-fade-leave-active {
     transition: opacity .5s ease
   }
-
+/* fa fa-check
+fa fa-times */
 </style>
