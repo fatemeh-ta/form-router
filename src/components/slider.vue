@@ -54,3 +54,29 @@ export default {
   },
 };
 </script>
+
+<style>
+.prev {
+  background-color: rgb(161, 156, 156);
+  padding: 8px 26px;
+  cursor: pointer;
+}
+.next {
+  background-color: rgb(161, 156, 156);
+  padding: 8px 26px;
+  cursor: pointer;
+}
+
+.slides {
+  padding: 16px 0;
+}
+
+.slides img {
+  /* width: 50%;
+  height: auto; */
+  display: block;
+  width: 600px;
+  height: 400px;
+}
+
+</style>
