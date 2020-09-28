@@ -19,6 +19,18 @@ npm run build
 npm run start
 ```
 
+3. GET API :
+
+```
+‍https://github.com/mhf-ir/test-openapi
+
+```
+4. RUN API
+
+```
+nodejs backend.js
+```
+
 ## Built With
 
 * [webpack](https://webpack.js.org/) 

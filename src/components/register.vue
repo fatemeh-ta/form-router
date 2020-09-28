@@ -90,6 +90,7 @@
             <span class="icon is-small is-right">
               <i class="fas fa-check" />
             </span>
+            <div class="check-pass">رمز عبور باید حداقل ۸ کاراکتر و شامل اعداد و حروف باشد</div>
           </div>
           <!--<p class="help is-danger" id="password-messsage"></p>-->
         </div>
@@ -168,7 +169,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             // console.log(requestOptions);
-            // this.cleardata();
+            this.cleardata();
           }
         });
     },
@@ -214,7 +215,7 @@ export default {
 
       if (!this.errors.length) {
         // eslint-disable-next-line no-alert
-        // alert('ثبت نام با موفقیت انجام شد');
+        alert('ثبت نام با موفقیت انجام شد');
         const user = {
           username: this.name,
           password: this.pwd,
@@ -323,5 +324,10 @@ export default {
 <style>
   .checkbox-active {
     margin: 8px 0;
+  }
+  .check-pass {
+    padding: 12px 0;
+    font-size: 0.8em;
+    color: red;
   }
 </style>

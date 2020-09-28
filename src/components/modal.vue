@@ -13,43 +13,30 @@
           <slot name="header">
             نمایش اطلاعات کاربر ثبت نام شده
 
-            <button
+            <!-- <button
               type="button"
               class="btn-close"
-              @click="close"
+              @click="closeModal"
               aria-label="Close modal"
             >
               x
-            </button>
+            </button> -->
           </slot>
         </header>
         <section
           class="modal-body"
           id="modalDescription"
         >
+            <!--CONTENT MODAL-->
           <slot name="body">
-             <div class="controls">
-              <button
-                class="button is-link is-light"
-                v-on:click.prevent="getUsers"
-              >
-              مشاهده
-              </button>
+            <div v-if="name.active===true">
+              {{ name.username | upperUser }}  *****
+              {{ name.nationalID }}   *****
+              {{ name.mobilePhone | changePhone }}
             </div>
-              <ul class="margin-top">
-                <li
-                  v-for="user in users"
-                  :key="user.users"
-                >
-                  <span v-if= "user.active==true">
-                    | {{ user.password }}
-                    | {{ user.mobilePhone }}
-                    | {{ user.nationalID }}
-                    | {{ user.active }}
-                    | {{ user.username }}
-                  </span>
-                </li>
-              </ul>
+            <div v-else>
+            کاربر فعال نمی باشد
+            </div>
           </slot>
         </section>
         <footer class="modal-footer">
@@ -57,7 +44,7 @@
             <button
               type="button"
               class="btn-green"
-              @click="close"
+              @click="$emit('close')"
               aria-label="Close modal"
             >
               بستن
@@ -70,42 +57,43 @@
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
+
 export default {
-  name: 'modal',
+  name: 'Modal',
   data() {
     return {
+      modalUserShow: '',
+      show: false,
       users: null,
+      isloading: true,
+      filter: '',
     };
   },
+  props: {
+    name: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
-    close() {
-      this.$emit('close');
-    },
-    howModal() {
-      this.isModalVisible = true;
-    },
     closeModal() {
-      this.isModalVisible = false;
+      this.show = false;
     },
-    getUsers() {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      fetch('http://127.0.0.1:9000/user/list', requestOptions)
-        // eslint-disable-next-line consistent-return
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json();
-          }
-        })
-        .then((data) => {
-          this.users = data;
-        });
+  },
+  filters: {
+    upperUser(value) {
+      // eslint-disable-next-line no-param-reassign
+      value = value.toString();
+      return value.toUpperCase().trim();
+    },
+    changePhone(phone) {
+      // eslint-disable-next-line no-param-reassign
+      phone = phone.toString();
+      return `+98${phone.slice(1)}`;
     },
   },
 };
+
 </script>
 
 <style>
@@ -183,4 +171,20 @@ export default {
 footer >button {
   cursor: pointer;
 }
+
+.modal-fade-enter,
+  .modal-fade-leave-active {
+    opacity: 0;
+  }
+
+  .modal-fade-enter-active,
+  .modal-fade-leave-active {
+    transition: opacity .5s ease
+  }
+
+  table th button {
+    cursor: pointer;
+  }
+/* fa fa-check
+fa fa-times */
 </style>
